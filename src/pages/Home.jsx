@@ -23,8 +23,10 @@ class Home extends Component {
   render(){
     console.log(this.state.films);
    
-    return (<div>{
-      <Gallery match={this.props.match.url} arr={this.state.films}/>
+    return (<div>
+      <h1>Trending today:</h1>
+      {
+      <Gallery match={`${this.props.match.url}movies`} arr={this.state.films}/>
     } </div>)
   }
 }

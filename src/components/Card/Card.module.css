@@ -1,0 +1,20 @@
+* {
+  font-family: sans-serif;
+}
+
+.CardWrapper {
+  display: flex;
+  margin-top: 30px;
+}
+
+.GenresBlock {
+  display: flex;
+}
+
+.Genres {
+  display: flex;
+  margin-right: 10px;
+}
+.OverviewBlock {
+  width: 400px;
+}
