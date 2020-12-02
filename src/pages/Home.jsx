@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fetchTrends from '../servises/FilmsApi.js';
+import filmApi from '../servises/FilmsApi.js';
 
 import Gallery from '../components/Gallery/Gallery';
 
@@ -11,7 +11,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const filmList = fetchTrends();
+    const filmList = filmApi.fetchTrends();
     filmList.then(arr => {
       this.setState({
         films: arr
@@ -24,7 +24,7 @@ class Home extends Component {
     console.log(this.state.films);
    
     return (<div>{
-      <Gallery arr={this.state.films}/>
+      <Gallery match={this.props.match.url} arr={this.state.films}/>
     } </div>)
   }
 }

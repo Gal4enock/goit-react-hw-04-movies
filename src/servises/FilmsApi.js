@@ -7,4 +7,10 @@ const fetchTrends = () => {
   .then(obj => obj.results)
 }
 
-export default fetchTrends;
+const fetchSearch = (query) => {
+  return fetch(`${baseUrl}search/movie?api_key=${apiKey}&language=en-US&page=1&query=${query}`)
+  .then(res => res.json())
+  .then(obj => obj.results)
+}
+
+export default {fetchTrends, fetchSearch};

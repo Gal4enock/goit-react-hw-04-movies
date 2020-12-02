@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 
 
 
-const Gallery = ({arr}) => (
+const Gallery = ({arr, match}) => (
   <ul className="GalleryWrapper">
-    {arr.map(el => {
+    {arr.map(film => {
       return (
-        <li key={el.id}><Link to="/">{el.title}</Link></li>
+        <li key={film.id}><Link to={`${match}/${film.id}`}>{film.title}</Link></li>
       )
     })}
   </ul>
