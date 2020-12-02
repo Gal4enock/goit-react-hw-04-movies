@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import filmApi from '../servises/FilmsApi.js';
 
@@ -12,16 +11,28 @@ class Movies extends Component {
     films: []
   }
   
-  componentDidMount() {
-  
-}
+
+  handleChange = ({target}) => {
+    this.setState({
+      query: target.value
+    })
+  }
+
+  handleSubmit = (e) =>  {
+    e.preventDefault();
+    console.log(this.state.query);
+    filmApi.fetchSearch(this.state.query).then(arr => {
+      console.log(arr);
+     return (  this.setState({ films: arr ? arr : [] }) )
+    })
+  }
 
   render() {
     return (
       <div>
         <form>
-          <input name="search" type="text" />
-          <button type='submit'>Search</button>
+          <input value={this.state.query} onChange={this.handleChange} name="search" type="text" />
+          <button onClick={this.handleSubmit} type='submit'>Search</button>
         </form>
         {this.state.films.length > 0 &&
           <Gallery match={this.props.match.url} arr={this.state.films}/>
