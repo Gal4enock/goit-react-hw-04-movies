@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Route } from 'react';
 
 import filmApi from '../servises/FilmsApi.js';
-
+import Cast from './Cast';
+import Reviews from './Reviews';
 import Gallery from '../components/Gallery/Gallery';
 
 
@@ -35,10 +36,11 @@ class Movies extends Component {
           <button onClick={this.handleSubmit} type='submit'>Search</button>
         </form>
         {this.state.films.length > 0 &&
+          <>
           <Gallery match={this.props.match.url} arr={this.state.films}/>
-        //   <ul>
-        //   {this.state.films.map(film => <li key={film.id}> <Link to={`${this.props.match.url}/${film.id}`}>{film.title}</Link> </li> )}
-        // </ul>
+          {/* <Route path='/movies/:movieId' component={Cast} />
+          <Route path='/movies/:movieId' component={Reviews} /> */}
+          </>
         }
       </div>
     )
