@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
-import fetchTrends from '../servises/FilmsApi.js'
+import fetchTrends from '../servises/FilmsApi.js';
+
+import Gallery from '../components/Gallery/Gallery';
+
 
 class Home extends Component {
+
   state = {
     films: []
-
   }
-  render(){
-    const baseUrl = "https://developers.themoviedb.org/3/";
-    const apiKey = 'e6ef81afed74ab1ee71e8c331ba25208';
 
-const fetchTrends = () => {
-  return fetch(`${baseUrl}trending/get-trending?api_key=${apiKey}`)
-    .then(res => res.json())
-    .then(arr => {
+  componentDidMount() {
+    const filmList = fetchTrends();
+    filmList.then(arr => {
       this.setState({
-      films: arr
+        films: arr
       })
-      console.log(arr);
-  })
-    }
-    fetchTrends()
-    return (<div>Hello </div> )
+    })
+  }
+  
+  
+  render(){
+    console.log(this.state.films);
+   
+    return (<div>{
+      <Gallery arr={this.state.films}/>
+    } </div>)
   }
 }
 
