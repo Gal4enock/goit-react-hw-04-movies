@@ -22,11 +22,19 @@ class Details extends Component {
     filmApi.getImage(this.props.match.params.movieId, this.state.movie.backdrop_path).then(console.log)
   }
 
+  handleGoBack = () => {
+    
+    if (this.props.location.state && this.props.location.state.from) {
+      this.props.history.push(this.props.location.state.from)
+    }
+}
+
   render() {
     console.log(this.state.movie);
     const { movie } = this.state;
     return (
       <>
+        <button onClick={this.handleGoBack} type="button"> Go back</button>
         {movie ? <Card obj={movie} /> : ''}
         {movie ? <p>jsfhjdsfh</p> : ''}
       </>

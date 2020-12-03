@@ -1,43 +1,51 @@
 import React, { Component, Route } from 'react';
+import queryString from 'query-string';
 
 import filmApi from '../servises/FilmsApi.js';
 import Cast from './Cast';
 import Reviews from './Reviews';
 import Gallery from '../components/Gallery/Gallery';
+import SearchBar from '../components/SearchBar'
 
 
 class Movies extends Component {
   state = {
-    query: '',
     films: []
   }
   
+  componentDidMount() {
+    const { query } = queryString.parse(this.props.location.search);
+    if (query) {
+      filmApi.fetchSearch(query).then(films => this.setState({ films }) )
+    }
+}
 
-  handleChange = ({target}) => {
-    this.setState({
-      query: target.value
-    })
-  }
+  componentDidUpdate(prevProps) {
+    const {query: prevQuery} = queryString.parse(prevProps.location.search);
+    const { query: nextQuery } = queryString.parse(this.props.location.search);
+    if (prevQuery !== nextQuery) {
+      filmApi.fetchSearch(nextQuery).then(films => this.setState({ films }) )
+     }
+    }
+  
 
-  handleSubmit = (e) =>  {
-    e.preventDefault();
-    console.log(this.state.query);
-    filmApi.fetchSearch(this.state.query).then(arr => {
-      console.log(arr);
-     return (  this.setState({ films: arr ? arr : [] }) )
+ 
+  hendleChangeQuery = query => {
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      search: `query=${query}`
     })
+  console.log(query);
   }
 
   render() {
     return (
       <div>
-        <form>
-          <input value={this.state.query} onChange={this.handleChange} name="search" type="text" />
-          <button onClick={this.handleSubmit} type='submit'>Search</button>
-        </form>
+        <SearchBar onSubmit={this.hendleChangeQuery}/>
+        
         {this.state.films.length > 0 &&
           <>
-          <Gallery match={this.props.match.url} arr={this.state.films}/>
+          <Gallery match={this.props.match.url} location={this.props.location} arr={this.state.films}/>
           {/* <Route path='/movies/:movieId' component={Cast} />
           <Route path='/movies/:movieId' component={Reviews} /> */}
           </>
