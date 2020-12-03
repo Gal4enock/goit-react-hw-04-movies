@@ -1,19 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import style from './Card.module.css'
 
 
-const Card = ({ obj }) => {
-  const arr = obj.genres.map(el => el.name );
-  console.log(arr);
+const Card = ({ obj, img }) => {
+  // const arr = obj.genres.map(el => el.name );
+  // console.log(arr);
   // console.log(obj.genres.map(el => {el.genres}));
   return (
     <div className={style.CardWrapper}>
       <div>
-        <img src="https://www.meme-arsenal.com/memes/284d33c28e86f0e51215fd5c9131e37d.jpg" alt="" />
+        <img className={style.Picture} width='300' height='300' src={img} alt="" />
       </div>
-      <div>
+      <div className={style.About}>
         <h2><span>{obj.title}</span>  ({obj.release_date.split("-")[0]})</h2>
         <p>User Score: wtf? </p>
         <h3>Overview</h3>
@@ -27,9 +26,6 @@ const Card = ({ obj }) => {
   )
 };
 
-Card.propTypes = {
-  // bla: PropTypes.string,
-};
 
 
 export default Card;

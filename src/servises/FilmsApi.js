@@ -1,6 +1,7 @@
+
 const baseUrl = "https://api.themoviedb.org/3/";
 const apiKey = 'e6ef81afed74ab1ee71e8c331ba25208';
-const apiKeyNew = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNmVmODFhZmVkNzRhYjFlZTcxZThjMzMxYmEyNTIwOCIsInN1YiI6IjVmYzYzODY3ZmJhNjI1MDA0NWExNjIzZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.AE7-0cT6mPlgjf9jheoA3Lk3SPT8TgyomFWdzAefDlA"
+const imgUrl = 'https://image.tmdb.org/t/p/w400';
 
 const fetchTrends = () => {
   return fetch(`${baseUrl}trending/movie/day?api_key=${apiKey}`)
@@ -19,9 +20,14 @@ const fetchMovie = (id) => {
   .then(res => res.json())
 }
 
-const getImage = (id, poster) => {
-  return fetch(`${baseUrl}movie/${id}/images?api_key=${apiKey}`)
-  .then(res => res.json())
+const getImage = (poster) => {
+  return fetch(`${imgUrl}${poster}`)
 }
 
-export default {fetchTrends, fetchSearch, fetchMovie, getImage};
+const fetchCast = (id) => {
+  return fetch(`${baseUrl}movie/${id}/credits?api_key=${apiKey}&language=en-US`)
+  .then(res => res.json())
+  
+}
+
+export default {fetchTrends, fetchSearch, fetchMovie, getImage, fetchCast};

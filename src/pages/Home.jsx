@@ -26,7 +26,8 @@ class Home extends Component {
     return (<div>
       <h1>Trending today:</h1>
       {
-      <Gallery match={`${this.props.match.url}movies`} arr={this.state.films}/>
+        <Gallery match={`${this.props.match.url}movies`} location={this.props.location}
+          arr={this.state.films} />
     } </div>)
   }
 }
