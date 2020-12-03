@@ -25,8 +25,9 @@ class Details extends Component {
   handleGoBack = () => {
     
     if (this.props.location.state && this.props.location.state.from) {
-      this.props.history.push(this.props.location.state.from)
+      return this.props.history.push(this.props.location.state.from)
     }
+    this.props.history.push("/movies")
 }
 
   render() {
