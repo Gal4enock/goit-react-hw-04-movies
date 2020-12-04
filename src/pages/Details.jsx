@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React, { lazy, Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 
 import filmApi from '../servises/FilmsApi.js';
 import Card from '../components/Card';
 
-import Cast from './Cast';
-import Reviews from './Reviews';
 
 class Details extends Component {
 
@@ -62,8 +60,10 @@ class Details extends Component {
             from: location.state.from
           }
         }}> Reviews </Link>
-        <Route path={`${match.path}/cast`} component={Cast} />
-        <Route path={`${match.path}/reviews`} component={Reviews} />
+        
+          <Route path={`${match.path}/cast`} component={lazy(() => import('./Cast'/* webpackChunkName: "Cast-page" */))} />
+          <Route path={`${match.path}/reviews`} component={lazy(() => import('./Reviews'/* webpackChunkName: "Reviews-page" */))} />
+         
       </>
     )
   }
