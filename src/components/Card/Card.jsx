@@ -4,13 +4,11 @@ import style from './Card.module.css'
 
 
 const Card = ({ obj, img }) => {
-  // const arr = obj.genres.map(el => el.name );
-  // console.log(arr);
-  // console.log(obj.genres.map(el => {el.genres}));
+
   return (
     <div className={style.CardWrapper}>
       <div>
-        <img className={style.Picture} width='300' height='300' src={img} alt="" />
+        <img className={style.Picture} width='300' height='300' src={img ? img: 'https://www.meme-arsenal.com/memes/334dedec90ef3de6cbef0f22e597798e.jpg'} alt="" />
       </div>
       <div className={style.About}>
         <h2><span>{obj.title}</span>  ({obj.release_date.split("-")[0]})</h2>

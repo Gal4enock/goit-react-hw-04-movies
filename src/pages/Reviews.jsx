@@ -18,14 +18,16 @@ class Reviews extends Component {
   render() {
     console.log("state ",this.state.reviews);
    return(
-     this.state.reviews && <ul style={{fontSize: 14+"px", width: 820+"px"}}>
+     this.state.reviews.length > 0 ?
+       <ul style={{ fontSize: 14 + "px", width: 820 + "px" }}>
        {this.state.reviews.map(review => {
          return <li key={review.id}>
            <h3>{review.author}</h3>
            <p>{review.content}</p>
          </li>
        })}
-    </ul>
+       </ul>
+       : <p>No reviews have been found :(</p>
     )
   } 
 }
