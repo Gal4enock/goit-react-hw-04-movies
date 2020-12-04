@@ -5,11 +5,12 @@ import Movies from '../../pages/Movies';
 import Navigation from '../Navigation';
 import Details from '../../pages/Details';
 
-import './App.css';
+import style from './App.module.css';
+
 
 function App() {
   return (
-    <div className="App">
+    <div className={style.App}>
       <Navigation />
       <hr/>
       <Switch>

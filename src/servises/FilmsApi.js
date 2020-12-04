@@ -27,7 +27,11 @@ const getImage = (poster) => {
 const fetchCast = (id) => {
   return fetch(`${baseUrl}movie/${id}/credits?api_key=${apiKey}&language=en-US`)
   .then(res => res.json())
-  
 }
 
-export default {fetchTrends, fetchSearch, fetchMovie, getImage, fetchCast};
+const fetchReviews = (id) => {
+  return fetch(`${baseUrl}movie/${id}/reviews?api_key=${apiKey}&language=en-US`)
+  .then(res => res.json())
+}
+
+export default {fetchTrends, fetchSearch, fetchMovie, getImage, fetchCast, fetchReviews};
