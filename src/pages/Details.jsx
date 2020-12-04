@@ -17,7 +17,7 @@ class Details extends Component {
   async componentDidMount() {
     const movie = await filmApi.fetchMovie(this.props.match.params.movieId);
     console.log("movie ",movie);
-    const image = await filmApi.getImage(movie.backdrop_path);
+    const image = await filmApi.getImage(movie.backdrop_path || movie.poster_path);
     console.log("image.d ",image);
 
     this.setState({
@@ -40,7 +40,8 @@ class Details extends Component {
   render() {
 
     const { movie, image } = this.state;
-    const {match} = this.props
+    console.log('location :>> ', this.props.location);
+    const {match, location} = this.props
     return (
       <>
         <button onClick={this.handleGoBack} type="button"> Back to movies </button>
@@ -48,12 +49,18 @@ class Details extends Component {
         
         <Link to={{
           pathname: `${match.url}/cast`,
-          state: {id: this.state.movie ? this.state.movie.id : ''}
+          state: {
+            id: movie ? movie.id : '',
+            from: location.state.from 
+          }
         }}> Cast </Link>
         <br/>
         <Link to={{
           pathname: `${match.url}/reviews`,
-          state: {id: this.state.movie ? this.state.movie.id : ''}
+          state: {
+            id: movie ? movie.id : '',
+            from: location.state.from
+          }
         }}> Reviews </Link>
         <Route path={`${match.path}/cast`} component={Cast} />
         <Route path={`${match.path}/reviews`} component={Reviews} />

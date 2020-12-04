@@ -12,7 +12,7 @@ const Card = ({ obj, img }) => {
       </div>
       <div className={style.About}>
         <h2><span>{obj.title}</span>  ({obj.release_date.split("-")[0]})</h2>
-        <p>User Score: wtf? </p>
+        <p>User Score: {+ obj.vote_average * 10}% </p>
         <h3>Overview</h3>
         <p className={style.OverviewBlock}>{obj.overview}</p>
         <h3>Genres</h3>
