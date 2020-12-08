@@ -34,4 +34,5 @@ const fetchReviews = (id) => {
   .then(res => res.json())
 }
 
-export default {fetchTrends, fetchSearch, fetchMovie, getImage, fetchCast, fetchReviews};
+const filmApi = { fetchTrends, fetchSearch, fetchMovie, getImage, fetchCast, fetchReviews };
+export default  filmApi
